@@ -1,10 +1,24 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Geospatial Technology Associates",
+    "objectID": "content/heatmap.html",
+    "href": "content/heatmap.html",
+    "title": "Heatmap",
     "section": "",
-    "text": "Welcome\nPlease visit our website: https://www.geospatialtec.com/"
+    "text": "Code\nimport pandas as pd\ndf = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')\n\nimport plotly.express as px\nfig = px.density_map(df, lat='Latitude', lon='Longitude', z='Magnitude', radius=10,\n                        center=dict(lat=0, lon=180), zoom=0,\n                        map_style=\"open-street-map\")\nfig.show()\n\n\n\n\n                                                \n\n\nFigure 1: Heatmap using Plotly"
+  },
+  {
+    "objectID": "content/heatmap.html#demo-using-plotly",
+    "href": "content/heatmap.html#demo-using-plotly",
+    "title": "Heatmap",
+    "section": "",
+    "text": "Code\nimport pandas as pd\ndf = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')\n\nimport plotly.express as px\nfig = px.density_map(df, lat='Latitude', lon='Longitude', z='Magnitude', radius=10,\n                        center=dict(lat=0, lon=180), zoom=0,\n                        map_style=\"open-street-map\")\nfig.show()\n\n\n\n\n                                                \n\n\nFigure 1: Heatmap using Plotly"
+  },
+  {
+    "objectID": "content/heatmap.html#demo-using-folium-and-leaflet",
+    "href": "content/heatmap.html#demo-using-folium-and-leaflet",
+    "title": "Heatmap",
+    "section": "Demo using Folium and Leaflet",
+    "text": "Demo using Folium and Leaflet\n\n\nCode\nimport numpy as np\n\ndata = (\n    np.random.normal(size=(100, 3)) * np.array([[1, 1, 1]]) + np.array([[48, 5, 1]])\n).tolist()\n\nimport folium\nfrom folium.plugins import HeatMap\n\nm = folium.Map([48.0, 5.0], zoom_start=6)\n\nHeatMap(data).add_to(m)\n\nm\n\n\n\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\nFigure 2: Heatmap using Folium and Leaflet"
   },
   {
     "objectID": "about.html",
@@ -12,5 +26,12 @@
     "title": "About",
     "section": "",
     "text": "Welcome"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Geospatial Technology Associates",
+    "section": "",
+    "text": "Welcome\nPlease visit our website: https://www.geospatialtec.com/"
   }
 ]
