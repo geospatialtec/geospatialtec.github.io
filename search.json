@@ -1,24 +1,31 @@
 [
   {
-    "objectID": "content/heatmap.html",
-    "href": "content/heatmap.html",
-    "title": "Heatmap",
+    "objectID": "content/demos.html",
+    "href": "content/demos.html",
+    "title": "Interactive Map Demos",
     "section": "",
     "text": "Code\nimport pandas as pd\ndf = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')\n\nimport plotly.express as px\nfig = px.density_map(df, lat='Latitude', lon='Longitude', z='Magnitude', radius=10,\n                        center=dict(lat=0, lon=180), zoom=2,\n                        map_style=\"open-street-map\")\nfig.show()\n\n\n\n\n                                                \n\n\nFigure 1: Heatmap using Plotly"
   },
   {
-    "objectID": "content/heatmap.html#demo-using-plotly",
-    "href": "content/heatmap.html#demo-using-plotly",
-    "title": "Heatmap",
+    "objectID": "content/demos.html#heatmap-demo-using-plotly",
+    "href": "content/demos.html#heatmap-demo-using-plotly",
+    "title": "Interactive Map Demos",
     "section": "",
     "text": "Code\nimport pandas as pd\ndf = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')\n\nimport plotly.express as px\nfig = px.density_map(df, lat='Latitude', lon='Longitude', z='Magnitude', radius=10,\n                        center=dict(lat=0, lon=180), zoom=2,\n                        map_style=\"open-street-map\")\nfig.show()\n\n\n\n\n                                                \n\n\nFigure 1: Heatmap using Plotly"
   },
   {
-    "objectID": "content/heatmap.html#demo-using-folium-and-leaflet",
-    "href": "content/heatmap.html#demo-using-folium-and-leaflet",
-    "title": "Heatmap",
-    "section": "Demo using Folium and Leaflet",
-    "text": "Demo using Folium and Leaflet\n\n\nCode\nimport numpy as np\n\ndata = (\n    np.random.normal(size=(100, 3)) * np.array([[1, 1, 1]]) + np.array([[48, 5, 1]])\n).tolist()\n\nimport folium\nfrom folium.plugins import HeatMap\n\nm = folium.Map([48.0, 5.0], zoom_start=6)\n\nHeatMap(data).add_to(m)\n\nm\n\n\n\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\nFigure 2: Heatmap using Folium and Leaflet"
+    "objectID": "content/demos.html#heatmap-demo-using-folium-and-leaflet",
+    "href": "content/demos.html#heatmap-demo-using-folium-and-leaflet",
+    "title": "Interactive Map Demos",
+    "section": "Heatmap Demo using Folium and Leaflet",
+    "text": "Heatmap Demo using Folium and Leaflet\n\n\nCode\nimport numpy as np\n\ndata = (\n    np.random.normal(size=(100, 3)) * np.array([[1, 1, 1]]) + np.array([[48, 5, 1]])\n).tolist()\n\nimport folium\nfrom folium.plugins import HeatMap\n\nm = folium.Map([48.0, 5.0], zoom_start=6)\n\nHeatMap(data).add_to(m)\n\nm\n\n\n\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\nFigure 2: Heatmap using Folium and Leaflet"
+  },
+  {
+    "objectID": "content/demos.html#plot-of-methane-plumes-from-emit-using-folium-and-leaflet",
+    "href": "content/demos.html#plot-of-methane-plumes-from-emit-using-folium-and-leaflet",
+    "title": "Interactive Map Demos",
+    "section": "Plot of Methane Plumes from EMIT using Folium and Leaflet",
+    "text": "Plot of Methane Plumes from EMIT using Folium and Leaflet\n\n\nCode\nimport geopandas as gpd\nimport folium.plugins\nfrom branca.element import Figure\n\nimport warnings\nwarnings.filterwarnings(\"ignore\")\n\ngdf = gpd.read_file('../data/output_gdf.geojson')\nplume_bbox = gpd.read_file('../data/plume_bbox.geojson')\n\n\ndef convert_bounds(bbox, invert_y=False):\n    \"\"\"\n    Helper method for changing bounding box representation to leaflet notation\n\n    ``(lon1, lat1, lon2, lat2) -&gt; ((lat1, lon1), (lat2, lon2))``\n    \"\"\"\n    x1, y1, x2, y2 = bbox\n    if invert_y:\n        y1, y2 = y2, y1\n    return ((y1, x1), (y2, x2))\n\n\n# Set up Figure and Basemap tiles\nfig = Figure(width=\"1080px\",height=\"540\")\nmap1 = folium.Map(tiles=None)\nfolium.TileLayer(tiles='https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',name='Google Satellite', attr='Google', overlay=True).add_to(map1)\nfolium.TileLayer(tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png',\n                name='ESRI World Imagery',\n                attr='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',\n                overlay='True').add_to(map1)\nfig.add_child(map1)\n# Add Search Results gdf\nplume_bbox.explore(\"name\",\n                   name='Plume BBox',\n                   style_kwds={\"fillOpacity\":0,\"width\":2},\n                   m=map1,\n                   legend=False)\n\ngdf.explore(\"_single_date_time\",\n            categorical=True,\n            style_kwds={\"fillOpacity\":0.1,\"width\":2},\n            name=\"EMIT L2B CH4PLM\",\n            tooltip=[\n                \"index\",\n                \"native-id\",\n                \"_single_date_time\",\n            ],\n            m=map1,\n            legend=False\n)\n# Zoom to Data\nmap1.fit_bounds(bounds=convert_bounds(plume_bbox.unary_union.bounds))\n# Add Layer controls\nmap1.add_child(folium.LayerControl(collapsed=False))\ndisplay(fig)\n\n\n\n\n\n\n\nFigure 3: Plot of Methane Plumes using Folium and Leaflet"
   },
   {
     "objectID": "about.html",
