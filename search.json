@@ -4,14 +4,14 @@
     "href": "content/heatmap.html",
     "title": "Heatmap",
     "section": "",
-    "text": "Code\nimport pandas as pd\ndf = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')\n\nimport plotly.express as px\nfig = px.density_map(df, lat='Latitude', lon='Longitude', z='Magnitude', radius=10,\n                        center=dict(lat=0, lon=180), zoom=0,\n                        map_style=\"open-street-map\")\nfig.show()\n\n\n\n\n                                                \n\n\nFigure 1: Heatmap using Plotly"
+    "text": "Code\nimport pandas as pd\ndf = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')\n\nimport plotly.express as px\nfig = px.density_map(df, lat='Latitude', lon='Longitude', z='Magnitude', radius=10,\n                        center=dict(lat=0, lon=180), zoom=2,\n                        map_style=\"open-street-map\")\nfig.show()\n\n\n\n\n                                                \n\n\nFigure 1: Heatmap using Plotly"
   },
   {
     "objectID": "content/heatmap.html#demo-using-plotly",
     "href": "content/heatmap.html#demo-using-plotly",
     "title": "Heatmap",
     "section": "",
-    "text": "Code\nimport pandas as pd\ndf = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')\n\nimport plotly.express as px\nfig = px.density_map(df, lat='Latitude', lon='Longitude', z='Magnitude', radius=10,\n                        center=dict(lat=0, lon=180), zoom=0,\n                        map_style=\"open-street-map\")\nfig.show()\n\n\n\n\n                                                \n\n\nFigure 1: Heatmap using Plotly"
+    "text": "Code\nimport pandas as pd\ndf = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')\n\nimport plotly.express as px\nfig = px.density_map(df, lat='Latitude', lon='Longitude', z='Magnitude', radius=10,\n                        center=dict(lat=0, lon=180), zoom=2,\n                        map_style=\"open-street-map\")\nfig.show()\n\n\n\n\n                                                \n\n\nFigure 1: Heatmap using Plotly"
   },
   {
     "objectID": "content/heatmap.html#demo-using-folium-and-leaflet",
